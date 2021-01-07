@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/danfit/static/css/main.071e4011.chunk.css",
+    "main.js": "/danfit/static/js/main.9264415c.chunk.js",
+    "main.js.map": "/danfit/static/js/main.9264415c.chunk.js.map",
+    "runtime-main.js": "/danfit/static/js/runtime-main.61b05b10.js",
+    "runtime-main.js.map": "/danfit/static/js/runtime-main.61b05b10.js.map",
+    "static/js/2.59b8cf2c.chunk.js": "/danfit/static/js/2.59b8cf2c.chunk.js",
+    "static/js/2.59b8cf2c.chunk.js.map": "/danfit/static/js/2.59b8cf2c.chunk.js.map",
+    "index.html": "/danfit/index.html",
+    "static/css/main.071e4011.chunk.css.map": "/danfit/static/css/main.071e4011.chunk.css.map",
+    "static/js/2.59b8cf2c.chunk.js.LICENSE.txt": "/danfit/static/js/2.59b8cf2c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.61b05b10.js",
+    "static/js/2.59b8cf2c.chunk.js",
+    "static/css/main.071e4011.chunk.css",
+    "static/js/main.9264415c.chunk.js"
+  ]
+}
