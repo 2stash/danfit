@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { Container } from "react-bootstrap";
 
 import HomeScreen from "./screens/HomeScreen";
 import Header from "./components/ui/Header";
@@ -12,7 +11,8 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <Container>
+      <div className="bg-gradient-to-r from-start to-end">
+      <div className="container flex justify-center mx-auto p-5 ">
         <main className='py-3'>
         <Switch>
           <Route path='/workouts/:id' component={YourWorkout}/>
@@ -20,7 +20,8 @@ const App = () => {
           <Route path='/' component={HomeScreen}  />
         </Switch>
         </main>
-      </Container>
+        </div>
+      </div>
     </Router>
   );
 };

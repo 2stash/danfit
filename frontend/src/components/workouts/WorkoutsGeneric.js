@@ -1,17 +1,29 @@
-import React from "react";
-import { CardGroup, Card, Button, Row, Col } from "react-bootstrap";
+import React, {useEffect} from "react"
+import { useDispatch, useSelector} from 'react-redux'
+import {listWorkouts } from '../../actions/workoutActions'
 import WorkoutCard from './WorkoutCard'
-import workouts from "./workoutData";
+import Spinner from '../ui/Spinner'
 
 const WorkoutsGeneric = () => {
+  const dispatch = useDispatch()
+
+  const workoutList = useSelector( state => state.workoutList )
+  const {loading, error, workouts} = workoutList
+
+  useEffect(()=> {
+    console.log('useeffect')
+    dispatch(listWorkouts())
+  }, [dispatch])
+
   return (
-    <Row>
-      {workouts.workouts.map((workout,idx) => (
-        <Col sm={12} md={6} lg={4} xl={4}  key={idx} >
-          <WorkoutCard title={workout} data={workouts[workout]}/>
-        </Col>
-      ))}
-    </Row>
+    <div className="flex flex-col sm:flex-row sm:flex-wrap ">
+      {loading ? <Spinner /> : error ? <h3>{error}</h3> :(workouts.map((workout,idx) => (
+        <div key={idx} className="m-2" >
+          <WorkoutCard key={workout._id} title={workout._id} data={workout}/>
+        </div>
+      )))}
+
+    </div>
   );
 };
 

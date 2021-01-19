@@ -1,45 +1,32 @@
 import React from "react";
-import { ListGroup } from 'react-router-dom'
-import { Col, Row, Card, Button } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import Button from "../components/ui/Button";
+import { Link } from "react-router-dom";
 
 const HomeScreen = () => {
   return (
-    <div className='text-center'>
-      <h1 >Some stuff</h1>
-      <Row className="mx-auto">
-        <Col className='mx-4 mx-auto '>
-          <Card className='my-3 p-3 rounded text-center mx-auto' style={{maxWidth:'400px'}}>
-            <Card.Body>
-              <Card.Title>Pick a Workout</Card.Title>
-              <Card.Text>
-                Pick a custom built work out and get started
-              </Card.Text>
-              <LinkContainer to="/workouts">
-                <Button variant='success'>Search Workouts</Button>
-              </LinkContainer>
-
-            </Card.Body>
-          </Card>
-        </Col>
-
-        {/* <Col  sm={12} md={6} lg={4} xl={3}>
-          <Card className='my-3 p-3 rounded' style={{height: '250px'}}>
-            <Card.Body>
-              <Card.Title>Sign Up</Card.Title>
-              <Card.Text>
-                By signing up you can save your data and track your progress.
-                You can even create and join teams to compete against your
-                friends!
-              </Card.Text>
-              <LinkContainer to='/login'>
-                <Button variant='danger'>Sign Up</Button>
-              </LinkContainer>
-  
-            </Card.Body>
-          </Card>
-        </Col> */}
-      </Row>
+    <div className='text-center max-w-md'>
+      <h1>Complete a workout throughout the day!</h1>
+      <p>No more hours of workingout</p>
+      <div>
+        <div className='bg-white mt-8 p-4 bg-opacity-75 .filter rounded-md'>
+          <p>
+            Pick a pre-built workout and start making improvements to your
+            health{" "}
+          </p>
+          <Link to='/workouts'>
+            <Button styles='bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-700'>
+              Search Workouts
+            </Button>
+          </Link>
+        </div>
+        <div className='bg-white mt-8 p-4 bg-opacity-75 .filter rounded-md'>
+          <p>Sign up to create custom workouts and track your progress!</p>
+          <p>You can even create and join teams to compete against friends!</p>
+          <Button styles='bg-green-500 hover:bg-green-400 active:bg-green-700'>
+            Sign Up
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

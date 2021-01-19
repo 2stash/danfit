@@ -1,7 +1,8 @@
-const workouts = {
-  workouts: ['Beginner', 'Intermediate', 'Advanced', 'DanFit'],
-  Beginner: {
-    exercises:['jumpingjacks', 'burpees', 'pushups', 'situps', 'squats', 'pullups'],
+const workouts = 
+[
+  { 
+    _id: "Beginner",
+    name: "Beginner",
     sets: 3,
     jumpingjacks: 10,
     burpees: 5,
@@ -9,9 +10,11 @@ const workouts = {
     situps: 5,
     squats: 5,
     pullups: 2,
-  },
-  Intermediate: {
     exercises:['jumpingjacks', 'burpees', 'pushups', 'situps', 'squats', 'pullups'],
+  },
+  {
+    _id:"Intermediate",
+    name:"Intermediate",
     sets: 3,
     jumpingjacks: 15,
     burpees: 10,
@@ -19,9 +22,11 @@ const workouts = {
     situps: 10,
     squats: 10,
     pullups: 3,
-  },
-  Advanced: {
     exercises:['jumpingjacks', 'burpees', 'pushups', 'situps', 'squats', 'pullups'],
+},
+  {
+    _id: "Advanced",
+    name: "Advanced",
     sets: 5,
     jumpingjacks: 15,
     burpees: 10,
@@ -29,9 +34,11 @@ const workouts = {
     situps: 10,
     squats: 10,
     pullups: 3,
-  },
-  DanFit: {
     exercises:['jumpingjacks', 'burpees', 'pushups', 'situps', 'squats', 'pullups'],
+  },
+  {
+    _id: "DanFit",
+    name: "DanFit",
     sets: 10,
     jumpingjacks: 15,
     burpees: 10,
@@ -39,7 +46,8 @@ const workouts = {
     situps: 10,
     squats: 10,
     pullups: 3,
-  },
-};
+    exercises:['jumpingjacks', 'burpees', 'pushups', 'situps', 'squats', 'pullups'],
+  }
+]
 
-export default workouts;
+module.exports = workouts;

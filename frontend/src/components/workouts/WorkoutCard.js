@@ -1,14 +1,14 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import Button from '../ui/Button'
 import { Link } from 'react-router-dom'
 
 const WorkoutCard = ({ data, title }) => {
 
   return (
-    <Card className={"my-3 p-3 rounded"}>
-      <Card.Body>
-        <Card.Title className={"mx-1 p-1"}>{title}</Card.Title>
-        <Card.Text>{data.sets} sets of</Card.Text>
+    <div className="my-3 p-3 rounded bg-white">
+      <div>
+        <div className={"mx-1 p-1"}>{title}</div>
+        <div>{data.sets} sets of</div>
         {data.exercises.map((exercise) => (
           <div>
             <span>
@@ -17,9 +17,9 @@ const WorkoutCard = ({ data, title }) => {
             </span>
           </div>
         ))}
-        <Link to={`/workouts/${title}`} ><Button>Start Workout</Button></Link>
-      </Card.Body>
-    </Card>
+        <Link to={`/workouts/${title}`} ><Button styles="bg-indigo-500">Start Workout</Button></Link>
+      </div>
+    </div>
   );
 };
 
