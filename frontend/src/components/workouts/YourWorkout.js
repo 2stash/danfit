@@ -1,87 +1,65 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../ui/Spinner";
 import CompletedWorkout from "./CompletedWorkout";
-
 import { Button, Row, Col, Card } from "react-bootstrap";
-
-import axios from 'axios'
-
+import { listWorkout, startWorkout, trackWorkoutProgress, completeWorkout } from "../../actions/workoutActions";
 
 const YourWorkout = ({ match }) => {
-  const [currentExercise, setCurrentExercise] = useState();
-  const [exerciseList, setExerciseList] = useState();
-  const [loading, setLoading] = useState(true);
-  const [workoutCompleted, setWorkoutCompleted] = useState(false);
- 
   const programName = match.params.id;
+  const dispatch = useDispatch();
+  const workoutDetails = useSelector((state) => state.workout);
+  const theCurrentExercise = useSelector((state)=> state.yourCurrentWorkout)
+
+  const { loading, error, workout } = workoutDetails;
 
   useEffect(() => {
-
-    const fetchWorkout = async () => {
-      const {data} = await axios.get(`/api/workouts/${programName}`)
-      setExerciseList(data);
-      setCurrentExercise(data.head);
-      setLoading(false);
-
-    }
-
-    fetchWorkout()
-
-    // const createWorkout = () => {
-    //   console.log(sets)
-    //   let workoutProgram = new linkedlist();
-    //   let exercise = "";
-    //   let reps = 0;
-
-    //   for (let i = 0; i < sets; i++) {
-    //     for (let j = 0; j < exerciseLength; j++) {
-    //       exercise = workoutData[programName].exercises[j];
-    //       reps = workoutData[programName][exercise];
-    //       workoutProgram.push(reps, exercise);
-    //     }
-    //   }
-    //   return workoutProgram;
-    // };
-
-    // const temp = createWorkout();
-
-  }, [programName]);
+    // Load selected workout
+    dispatch(listWorkout(match.params.id));
+  }, [dispatch, match]);
 
   const handleCompleteExercise = () => {
-    let temp = currentExercise.next;
+    let temp = theCurrentExercise.workout.next;
     if (temp === null) {
-      setWorkoutCompleted(true);
+      dispatch(completeWorkout())
     } else {
-      setCurrentExercise(temp);
+      dispatch(trackWorkoutProgress(temp))
     }
+  };
+
+  const handleWorkoutStart = () => {
+    dispatch(startWorkout(workout.head, programName))
   };
 
   return (
     <Col className='mx-auto'>
       <h2 className='text-center'>{programName} Workout</h2>
-      {workoutCompleted === false ? (
-        currentExercise === "undefined" || loading === true ? (
-          <p>Loading workout</p>
-        ) : (
-          <Row className=' mx-auto text-center'>
-            <Col>
-              <Card bg="success">
-                <Card.Body>
-                  <Card.Title>Current Exercise</Card.Title>
-                  <Card.Text as='span' className="mx-4" >{currentExercise.exercise}</Card.Text>
-                  <Card.Text as='span' className="mx-4"> {currentExercise.reps}</Card.Text>
-                  <Button onClick={handleCompleteExercise}>Mark Complete</Button>
-                </Card.Body>
-              </Card>
+      {theCurrentExercise.workout === null ? (
+        <button onClick={handleWorkoutStart}>Begin</button>
+      ) : null}
 
-              {/* <span>
-              {currentExercise.exercise} {currentExercise.reps}
-            </span>
-            <Button onClick={handleCompleteExercise}>Completed</Button> */}
-            </Col>
-          </Row>
-        )
+      {loading === true ? (
+        <Spinner />
+      ) : theCurrentExercise.completed === false && theCurrentExercise.workout != null ? (
+        <Row className=' mx-auto text-center'>
+          <Col>
+            <Card bg='success'>
+              <Card.Body>
+                <Card.Title>Current Exercise</Card.Title>
+                <Card.Text as='span' className='mx-4'>
+                  {theCurrentExercise.workout.exercise}
+                </Card.Text>
+                <Card.Text as='span' className='mx-4'>
+                  {" "}
+                  {theCurrentExercise.workout.reps}
+                </Card.Text>
+                <Button onClick={handleCompleteExercise}>Mark Complete</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
       ) : (
-        <CompletedWorkout workout={exerciseList} />
+        theCurrentExercise.completed === true && <CompletedWorkout workout={workout} />
       )}
     </Col>
   );
